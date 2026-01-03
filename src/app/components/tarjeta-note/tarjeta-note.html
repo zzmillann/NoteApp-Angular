@@ -1,0 +1,20 @@
+<section class="note-card">
+  <!-- TÍTULO EDITABLE -->
+  <input
+    class="note-title-input"
+    type="text"
+    placeholder="Título de la nota"
+    [value]="nota()?.title"
+    #titleInput
+    (input)="cambiarTituloNota(titleInput.value, nota()!.id)"
+  />
+
+  <!-- CONTENIDO EDITABLE -->
+  <textarea
+    class="note-content-input"
+    placeholder="Escribe tu nota aquí..."
+    rows="4"
+    #contentInput
+    (input)="cambiarContenidoNota(contentInput.value, nota()!.id)"
+  >{{ nota()?.content }}</textarea>
+</section>

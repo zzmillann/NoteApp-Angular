@@ -1,0 +1,75 @@
+<section
+  class="notes-page"
+  style="
+    padding: 24px;
+    max-width: 1200px;
+    margin: auto;
+    position: relative;
+  "
+>
+  <!-- Título -->
+  <h1
+    class="page-title"
+    style="
+      font-size: 2rem;
+      margin-bottom: 4px;
+    "
+  >
+    Mis Notas
+  </h1>
+
+  <!-- Volver al inicio -->
+  <a
+    routerLink="/"
+    class="back-home-button"
+    style="
+      display: inline-block;
+      margin-bottom: 24px;
+      text-decoration: none;
+      color: #3f51b5;
+      font-weight: 500;
+      margin-top: 20px;
+    "
+  >
+    ← Volver al Inicio
+  </a>
+
+  <!-- Grid de notas -->
+  <ul
+    class="notes-grid"
+    style="
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    "
+  >
+    @for (notas of notas(); track $index) {
+      <li class="note-item">
+        <app-tarjeta-note [nota]="notas"></app-tarjeta-note>
+      </li>
+    }
+  </ul>
+
+  <!-- Botón nueva nota -->
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="abrirModal()"
+    style="
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    "
+  >
+    ➕ Nueva nota
+  </button>
+
+</section>
+

@@ -1,0 +1,47 @@
+<h2 mat-dialog-title class="modal-title">
+  Nueva nota
+</h2>
+
+<form
+  class="modal-form"
+  [formGroup]="formulario"
+  (ngSubmit)="guardar()"
+>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Título</mat-label>
+    <input
+      matInput
+      formControlName="title"
+      placeholder="Ej: Ideas para el proyecto"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Contenido</mat-label>
+    <textarea
+      matInput
+      rows="5"
+      formControlName="content"
+      placeholder="Escribe tu nota aquí…"
+    ></textarea>
+  </mat-form-field>
+
+  <div class="actions">
+    <button
+      mat-stroked-button
+      type="button"
+      mat-dialog-close
+    >
+      Cancelar
+    </button>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="formulario.invalid"
+    >
+      Guardar
+    </button>
+  </div>
+</form>
