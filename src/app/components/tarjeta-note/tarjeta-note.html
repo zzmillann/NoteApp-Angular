@@ -4,7 +4,7 @@
     class="note-title-input"
     type="text"
     placeholder="Título de la nota"
-    [value]="nota()?.title"
+    [value]="nota()?.title | uppercase"
     #titleInput
     (input)="cambiarTituloNota(titleInput.value, nota()!.id)"
   />
@@ -17,4 +17,8 @@
     #contentInput
     (input)="cambiarContenidoNota(contentInput.value, nota()!.id)"
   >{{ nota()?.content }}</textarea>
+
+  <div class="note-date">
+    {{ nota()?.date | date:'short' }}
+  </div>
 </section>

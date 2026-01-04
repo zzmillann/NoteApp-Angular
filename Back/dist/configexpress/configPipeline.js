@@ -7,6 +7,7 @@ exports.default = pipeline;
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const db_1 = require("../db");
 function pipeline(expressApp) {
     //configurar el 1º modulo middleware cookie-parser para gestionar cookies en express, las cookies se van a almacenar en objeto req.cookies
     //console.log(`el valor de la variable cookieParser es: ${cookiesParser}`);
@@ -20,6 +21,9 @@ function pipeline(expressApp) {
     //configurar el 4º modulo middleware cors() para gestionar politicas CORS en express
     //console.log(`el valor de la variable cors es: ${cors}`);
     expressApp.use((0, cors_1.default)());
+    //conectar a la base de datos MongoDB
+    (0, db_1.connectDB)();
+    //configurar las rutas
     expressApp.use('/api/Notas', require('../configexpress/configRouter/notasRouter'));
 }
 //# sourceMappingURL=configPipeline.js.map

@@ -3,7 +3,7 @@ import { Express } from 'express';
 import cookiesParser from 'cookie-parser';
 import express from 'express';
 import cors from 'cors';
-
+import { connectDB } from '../db';
 export default function pipeline(expressApp: Express) {
 
 
@@ -24,5 +24,9 @@ export default function pipeline(expressApp: Express) {
     //console.log(`el valor de la variable cors es: ${cors}`);
     expressApp.use(cors());
 
+    //conectar a la base de datos MongoDB
+    connectDB();
+
+    //configurar las rutas
     expressApp.use('/api/Notas', require('../configexpress/configRouter/notasRouter'));
 }

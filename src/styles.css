@@ -143,3 +143,9 @@ body {
   padding: 32px !important;
 }
 
+.note-date {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 12px;
+  text-align: right;
+}

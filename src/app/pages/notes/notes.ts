@@ -30,6 +30,10 @@ getNotas() {
 };
 
 
+dateActual(): Date {
+  return new Date();
+}
+
 abrirModal() {
   const dialogRef = this.dialog.open(Modalnota, {
   width: '380px',
@@ -42,7 +46,7 @@ abrirModal() {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      this.servnote.crearnota({title: result.title, content: result.content}).subscribe((nuevaNota) => {
+      this.servnote.crearnota({title: result.title, content: result.content, date: this.dateActual()}).subscribe((nuevaNota) => {
         const notasActuales = this.servnote.notes();
         this.servnote.notes.update(() => [...notasActuales, nuevaNota]);
       });

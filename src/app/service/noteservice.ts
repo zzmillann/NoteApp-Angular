@@ -38,8 +38,8 @@ actuaizarTituloNota(id: string, nuevoTitulo: string): void {
   }
 
 
-  crearnota({title, content}: {title: string; content: string}): Observable<INotes> {
-return this.http.post<INotes>('http://localhost:3000/api/Notas', {title, content});
+  crearnota({title, content, date}: {title: string; content: string; date: Date}): Observable<INotes> {
+return this.http.post<INotes>('http://localhost:3000/api/Notas', {title, content, date});
   
 }
 }
