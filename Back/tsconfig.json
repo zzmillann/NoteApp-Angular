@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",              // JS moderno, compatible con Node 18+
+    "module": "CommonJS",            // Node usa CommonJS
+    "outDir": "./dist",              // donde se pondrán los .js compilados
+    "rootDir": ".",                  // la raíz de tus TS, normalmente Back/
+    "esModuleInterop": true,         // para poder importar paquetes npm comunes
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,            // evita errores con tipos de dependencias
+    "sourceMap": true
+  },
+  "include": ["**/*.ts"],            // todos tus TS en el proyecto
+  "exclude": ["node_modules", "dist"]
+}

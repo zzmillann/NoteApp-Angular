@@ -13,7 +13,7 @@ notes: WritableSignal<INotes[]> = signal<INotes[]>([]);
 
 
 getNotes(): Observable<INotes[]> {
-  return this.http.get<INotes[]>('https://caacbae3604adc4705cd.free.beeceptor.com/api/notes/');
+  return this.http.get<INotes[]>('http://localhost:3000/api/Notas');
 }
 
 
@@ -36,9 +36,10 @@ actuaizarTituloNota(id: string, nuevoTitulo: string): void {
       this.notes.set([...notasActuales]);
     }
   }
-crearnota({title, content}: {title: string; content: string}): Observable<INotes> {
-  return this.http.post<INotes>('https://caacbae3604adc4705cd.free.beeceptor.com/api/notes/', {title, content})
 
+
+  crearnota({title, content}: {title: string; content: string}): Observable<INotes> {
+return this.http.post<INotes>('http://localhost:3000/api/Notas', {title, content});
   
 }
 }
