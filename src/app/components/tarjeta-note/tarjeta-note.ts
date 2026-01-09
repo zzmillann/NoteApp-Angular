@@ -11,15 +11,24 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 export class TarjetaNote {
 
   private noteservice = inject(Noteservice);
-//hacer una señal input
-nota = input<INotes>();
+  //hacer una señal input
+  nota = input<INotes>();
 
 
-cambiarTituloNota(nuevoTitulo: string, id: string) {
-  this.noteservice.actuaizarTituloNota(id, nuevoTitulo);  
+  cambiarTituloNota(nuevoTitulo: string, id: string) {
+    this.noteservice.actuaizarTituloNota(id, nuevoTitulo);
+  }
+
+  cambiarContenidoNota(nuevoContenido: string, id: string) {
+    this.noteservice.actualizarContenidoNota(id, nuevoContenido);
+  }
+
+  eliminarNota(id: string) {
+    this.noteservice.eliminarNota(id).subscribe(() => {
+      // Actualizar la señal para reflejar el cambio en la interfaz de usuario
+      const notasActuales = this.noteservice.notes();
+      this.noteservice.notes.set(notasActuales.filter(nota => nota.id !== id));
+    });
+  }
 }
 
-cambiarContenidoNota(nuevoContenido: string, id: string) {
-  this.noteservice.actualizarContenidoNota(id, nuevoContenido);  
-}
-}

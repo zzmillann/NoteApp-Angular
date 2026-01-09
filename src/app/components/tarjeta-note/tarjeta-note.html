@@ -17,7 +17,13 @@
     #contentInput
     (input)="cambiarContenidoNota(contentInput.value, nota()!.id)"
   >{{ nota()?.content }}</textarea>
-
+  <button
+    class="delete-note-button"
+    (click)="eliminarNota(nota()!.id)"
+    title="Eliminar nota"
+  >
+    🗑
+  </button>
   <div class="note-date">
     {{ nota()?.date | date:'short' }}
   </div>

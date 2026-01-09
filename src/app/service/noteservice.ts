@@ -9,19 +9,19 @@ import { Observable } from 'rxjs';
 export class Noteservice {
   private http = inject(HttpClient);
 
-notes: WritableSignal<INotes[]> = signal<INotes[]>([]);
+  notes: WritableSignal<INotes[]> = signal<INotes[]>([]);
 
 
-getNotes(): Observable<INotes[]> {
-  return this.http.get<INotes[]>('http://localhost:3000/api/Notas');
-}
+  getNotes(): Observable<INotes[]> {
+    return this.http.get<INotes[]>('http://localhost:3000/api/Notas');
+  }
 
 
 
-actuaizarTituloNota(id: string, nuevoTitulo: string): void {
+  actuaizarTituloNota(id: string, nuevoTitulo: string): void {
     const notasActuales = this.notes();
     const indice = notasActuales.find((nota) => nota.id === id);
- 
+
     if (indice) {
       indice.title = nuevoTitulo;
       this.notes.set([...notasActuales]);
@@ -30,7 +30,7 @@ actuaizarTituloNota(id: string, nuevoTitulo: string): void {
 
   actualizarContenidoNota(id: string, nuevoContenido: string): void {
     const notasActuales = this.notes();
-    const indice = notasActuales.find((nota) => nota.id === id);  
+    const indice = notasActuales.find((nota) => nota.id === id);
     if (indice) {
       indice.content = nuevoContenido;
       this.notes.set([...notasActuales]);
@@ -38,9 +38,17 @@ actuaizarTituloNota(id: string, nuevoTitulo: string): void {
   }
 
 
-  crearnota({title, content, date}: {title: string; content: string; date: Date}): Observable<INotes> {
-return this.http.post<INotes>('http://localhost:3000/api/Notas', {title, content, date});
-  
-}
+  crearnota({ title, content, date }: { title: string; content: string; date: Date }): Observable<INotes> {
+    return this.http.post<INotes>('http://localhost:3000/api/Notas', { title, content, date });
+
+  }
+
+  eliminarNota(id: string): Observable<void> {
+    return this.http.delete<void>(`http://localhost:3000/api/Notas/${id}`);
+  }
+
+  eliminarTodasNotas(): Observable<void> {
+    return this.http.delete<void>('http://localhost:3000/api/Notas/all');
+  }
 }
 

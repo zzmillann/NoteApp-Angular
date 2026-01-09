@@ -39,5 +39,50 @@ routerNotas.post('/', async (req, res) => {
         res.status(500).json({ message: 'Error al crear la nota' });
     }
 });
+const mongoose = require('mongoose');
+routerNotas.delete('/all', async (req, res) => {
+    try {
+        await Notes_1.default.deleteMany({});
+        try {
+            const response = await fetch('https://caacbae3604adc4705cd.free.beeceptor.com/api/notes/');
+            const notes = await response.json();
+            if (Array.isArray(notes)) {
+                const deletePromises = notes.map((note) => fetch(`https://caacbae3604adc4705cd.free.beeceptor.com/api/notes/${note.id}`, {
+                    method: 'DELETE'
+                }));
+                await Promise.all(deletePromises);
+            }
+        }
+        catch (fetchError) {
+            console.error('Error al sincronizar eliminación masiva con API externa:', fetchError);
+        }
+        res.status(200).json({ message: 'Todas las notas han sido eliminadas' });
+    }
+    catch (error) {
+        console.error('Error al eliminar todas las notas:', error);
+        res.status(500).json({ message: 'Error al eliminar todas las notas' });
+    }
+});
+routerNotas.delete('/:id', async (req, res) => {
+    try {
+        const noteId = req.params.id;
+        if (mongoose.Types.ObjectId.isValid(noteId)) {
+            await Notes_1.default.findByIdAndDelete(noteId);
+        }
+        try {
+            await fetch(`https://caacbae3604adc4705cd.free.beeceptor.com/api/notes/${noteId}`, {
+                method: 'DELETE'
+            });
+        }
+        catch (fetchError) {
+            console.error('Error al sincronizar eliminación con API externa:', fetchError);
+        }
+        res.status(200).json({ message: 'Nota eliminada correctamente' });
+    }
+    catch (error) {
+        console.error('Error al eliminar la nota:', error);
+        res.status(500).json({ message: 'Error al eliminar la nota' });
+    }
+});
 module.exports = routerNotas;
 //# sourceMappingURL=notasRouter.js.map
